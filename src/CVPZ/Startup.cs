@@ -1,3 +1,4 @@
+using CVPZ.Application.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -27,6 +28,8 @@ namespace CVPZ
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CVPZ API", Version = "v1.0.0.0" });
             });
+
+            services.AddTransient<IJournalService, JournalService>();
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
