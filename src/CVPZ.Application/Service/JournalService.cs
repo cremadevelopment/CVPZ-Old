@@ -4,12 +4,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace CVPZ.Application.Service
 {
     public interface IJournalService
     {
-        IEnumerable<JournalEntry> Get();
+        Task<IEnumerable<JournalEntry>> GetAsync();
+        Task<JournalEntry> AddAsync(JournalEntry entry);
+        Task<JournalEntry> GetByIdAsync(int id);
     }
 
     public class JournalService : IJournalService
@@ -39,20 +42,44 @@ namespace CVPZ.Application.Service
             _logger = logger;
         }
 
-        public IEnumerable<JournalEntry> Get()
+        public async Task<IEnumerable<JournalEntry>> GetAsync()
         {
             _logger.LogInformation("Service request recieved journal entry request.");
             var rng = new Random();
-            var result
-                = Enumerable.Range(1, 5)
+            var taskResult = Task.Run(() => {
+                return Enumerable.Range(1, 5)
                     .Select(index => new JournalEntry
                     {
                         Description = Descriptions[rng.Next(Descriptions.Length)],
                         Technologies = new List<string> { Technologies[rng.Next(Technologies.Length)], Technologies[rng.Next(Technologies.Length)] }
-                    })
-                    .ToArray();
+                    });
+            });
+            return await taskResult;
+        }
 
-            return result;
+        public async Task<JournalEntry> GetByIdAsync(int id)
+        {
+            _logger.LogInformation("Service request recieved to get journal entry by id.");
+            var rng = new Random();
+            var taskResult = Task.Run(() => {
+                return new JournalEntry {
+                    Id = id,
+                    Description = Descriptions[rng.Next(Descriptions.Length)],
+                    Technologies = new List<string> { Technologies[rng.Next(Technologies.Length)], Technologies[rng.Next(Technologies.Length)] }
+                };
+            });
+            return await taskResult;
+        }
+
+        public async Task<JournalEntry> AddAsync(JournalEntry entry)
+        {
+            _logger.LogInformation("Service request recieved to create journal entry.");
+            var rng = new Random();
+            var taskResult = Task.Run(() => {
+                entry.Id = rng.Next(3000, 3999);
+                return entry;
+            });
+            return await taskResult;
         }
     }
 }
