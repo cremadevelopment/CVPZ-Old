@@ -12,6 +12,7 @@ namespace CVPZ.Application.Service
     {
         Task<IEnumerable<JournalEntry>> GetAsync();
         Task<JournalEntry> AddAsync(JournalEntry entry);
+        Task<JournalEntry> GetByIdAsync(int id);
     }
 
     public class JournalService : IJournalService
@@ -52,6 +53,20 @@ namespace CVPZ.Application.Service
                         Description = Descriptions[rng.Next(Descriptions.Length)],
                         Technologies = new List<string> { Technologies[rng.Next(Technologies.Length)], Technologies[rng.Next(Technologies.Length)] }
                     });
+            });
+            return await taskResult;
+        }
+
+        public async Task<JournalEntry> GetByIdAsync(int id)
+        {
+            _logger.LogInformation("Service request recieved to get journal entry by id.");
+            var rng = new Random();
+            var taskResult = Task.Run(() => {
+                return new JournalEntry {
+                    Id = id,
+                    Description = Descriptions[rng.Next(Descriptions.Length)],
+                    Technologies = new List<string> { Technologies[rng.Next(Technologies.Length)], Technologies[rng.Next(Technologies.Length)] }
+                };
             });
             return await taskResult;
         }

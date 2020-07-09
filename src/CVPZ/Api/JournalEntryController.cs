@@ -33,9 +33,18 @@ namespace CVPZ.Api
             return journalEntries;
         }
 
+        [HttpGet("{id:int}")]
+        public async Task<JournalEntry> GetById(int id)
+        {
+            _logger.LogInformation("Recieved journal entry get request.");
+            var entry = await _journalService.GetByIdAsync(id);
+            return JournalEntry.FromEntity(entry);
+        }
+
         [HttpPost]
         public async Task<JournalEntry> Post(JournalEntry journalEntry)
         {
+            _logger.LogInformation("Recieved journal entry create request.");
             var entry = new JournalEntryEntity()
             {
                 Description = journalEntry.Description,
