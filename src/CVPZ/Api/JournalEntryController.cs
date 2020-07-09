@@ -6,6 +6,7 @@ using CVPZ.Api.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
+using JournalEntryEntity = CVPZ.Core.Entities.JournalEntry;
 
 namespace CVPZ.Api
 {
@@ -27,10 +28,21 @@ namespace CVPZ.Api
         {
             _logger.LogInformation("Recieved journal entry request.");
             var journalEntries
-                = (await _journalService.Get())
+                = (await _journalService.GetAsync())
                     .Select(x => JournalEntry.FromEntity(x));
             return journalEntries;
+        }
 
+        [HttpPost]
+        public async Task<JournalEntry> Post(JournalEntry journalEntry)
+        {
+            var entry = new JournalEntryEntity()
+            {
+                Description = journalEntry.Description,
+                Technologies = journalEntry.Technologies
+            };
+            await _journalService.AddAsync(entry);
+            return JournalEntry.FromEntity(entry);
         }
     }
 }
