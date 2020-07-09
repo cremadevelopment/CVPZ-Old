@@ -4,12 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace CVPZ.Application.Service
 {
     public interface IJournalService
     {
-        IEnumerable<JournalEntry> Get();
+        Task<IEnumerable<JournalEntry>> Get();
     }
 
     public class JournalService : IJournalService
@@ -39,20 +40,19 @@ namespace CVPZ.Application.Service
             _logger = logger;
         }
 
-        public IEnumerable<JournalEntry> Get()
+        public async Task<IEnumerable<JournalEntry>> Get()
         {
             _logger.LogInformation("Service request recieved journal entry request.");
             var rng = new Random();
-            var result
-                = Enumerable.Range(1, 5)
+            var taskResult = Task.Run(() => {
+                return Enumerable.Range(1, 5)
                     .Select(index => new JournalEntry
                     {
                         Description = Descriptions[rng.Next(Descriptions.Length)],
                         Technologies = new List<string> { Technologies[rng.Next(Technologies.Length)], Technologies[rng.Next(Technologies.Length)] }
-                    })
-                    .ToArray();
-
-            return result;
+                    });
+            });
+            return await taskResult;
         }
     }
 }
