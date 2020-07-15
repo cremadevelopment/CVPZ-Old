@@ -9,11 +9,17 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
+import { JournalListComponent } from './journal-list/journal-list.component';
+import { HomeComponent } from './home/home.component';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavMenuComponent
+    NavMenuComponent,
+    JournalListComponent,
+    HomeComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
