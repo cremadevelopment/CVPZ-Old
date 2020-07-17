@@ -13,6 +13,7 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { JournalListComponent } from './journal-list/journal-list.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
+import { JournalAddComponent } from './journal-add/journal-add.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { AboutComponent } from './about/about.component';
     NavMenuComponent,
     JournalListComponent,
     HomeComponent,
-    AboutComponent
+    AboutComponent,
+    JournalAddComponent
   ],
   imports: [
     BrowserModule,
