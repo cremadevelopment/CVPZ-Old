@@ -1,1 +1,7 @@
 <p>journal-list works!</p>
+
+<ul id="journal-entry-list">
+    <li *ngFor="let entry of journalService.journalEntries | async" >
+        {{ entry.description }}
+    </li>
+</ul>
