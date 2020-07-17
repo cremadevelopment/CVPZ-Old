@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { JournalService } from '../journal.service';
+import { JournalEntry } from '../types';
+
 @Component({
   selector: 'app-journal-add',
   templateUrl: './journal-add.component.html',
@@ -6,7 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class JournalAddComponent implements OnInit {
 
-  constructor() { }
+  model = new JournalEntry();
+
+  constructor(journalService: JournalService) { }
 
   ngOnInit(): void {
   }
