@@ -9,7 +9,7 @@ import { JournalService } from '../journal.service';
 })
 export class JournalListComponent implements OnInit {
 
-  constructor(protected journalService: JournalService) { }
+  constructor(public journalService: JournalService) { }
 
   ngOnInit(): void { }
 

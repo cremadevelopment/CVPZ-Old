@@ -1,9 +1,10 @@
-<p>journal-list works!</p>
+<h2>Journal Entries</h2>
 
-<ul id="journal-entry-list">
-    <li *ngFor="let entry of journalService.journalEntries | async" >
-        {{ entry.description }}
-    </li>
-</ul>
+
+<mat-list role="list" *ngIf="journalService.journalEntries | async">
+  <mat-list-item role="listitem" *ngFor="let entry of journalService.journalEntries | async">
+      <div mat-line>{{ entry.description }}</div>
+  </mat-list-item>
+</mat-list>
 
 <app-journal-add></app-journal-add>

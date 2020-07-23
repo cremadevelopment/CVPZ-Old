@@ -11,9 +11,15 @@ export class JournalAddComponent implements OnInit {
 
   model = new JournalEntry();
 
-  constructor(journalService: JournalService) { }
+  constructor(private journalService: JournalService) { }
 
   ngOnInit(): void {
   }
 
+  public addJournalEntry(): void {
+    this.journalService.addJournalEntry(this.model);
+  }
+
+  // TODO: Remove this when we're done
+  diagnostic(): string { return JSON.stringify(this.model); }
 }

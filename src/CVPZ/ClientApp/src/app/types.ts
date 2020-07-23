@@ -1,4 +1,5 @@
 export class JournalEntry {
-   id: number;
+  id: number;
   description: string;
+  technologies: string[];
 }
