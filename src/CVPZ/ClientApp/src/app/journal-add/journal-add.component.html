@@ -1,0 +1,14 @@
+<h2>Add Journal Entry</h2>
+
+<form class="example-form" (ngSubmit)="addJournalEntry()" #journalAddForm='ngForm' *ngIf="model">
+    <p>
+        <mat-form-field class="example-full-width">
+            <mat-label>Description</mat-label>
+            <textarea matInput [(ngModel)]="model.description" name="description"></textarea>
+        </mat-form-field>
+    </p>
+
+    <button type="submit" [disabled]="!journalAddForm.form.valid" mat-raised-button>Add Entry</button>
+</form>
+
+{{ diagnostic() }}
