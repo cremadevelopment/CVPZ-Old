@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace CVPZ.Core.Entities
 {
-    public class Job
+    public class Job : BaseEntity
     {
         private List<JournalEntry> _journalEntries;
 
@@ -12,7 +12,6 @@ namespace CVPZ.Core.Entities
             _journalEntries = new List<JournalEntry>();
         }
 
-        public Guid Id { get; set; }
         public string CompanyName { get; set; }
         public string Title { get; set; }
         public DateTimeOffset StartDate { get; set; }

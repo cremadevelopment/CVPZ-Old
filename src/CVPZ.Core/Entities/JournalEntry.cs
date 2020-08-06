@@ -2,9 +2,8 @@
 
 namespace CVPZ.Core.Entities
 {
-    public class JournalEntry
+    public class JournalEntry : BaseEntity
     {
-        public int Id { get; set; }
         public string Description { get; set; }
         public List<string> Technologies { get; set; }
     }
