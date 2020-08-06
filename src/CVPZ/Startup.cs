@@ -1,8 +1,10 @@
 using CVPZ.Application.Service;
+using CVPZ.Infrastructure.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -22,6 +24,11 @@ namespace CVPZ
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddDbContext<CVPZContext>(options =>
+                options.UseSqlite(
+                    Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddControllersWithViews();
 
             services.AddSwaggerGen(c =>
@@ -36,6 +43,13 @@ namespace CVPZ
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+
+            services.Scan(scan => scan
+                .FromAssemblyOf<CVPZContext>()
+                    .AddClasses(@class => @class.Where(type =>  type.Name.EndsWith("Repository")))
+                    .AsImplementedInterfaces()
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
