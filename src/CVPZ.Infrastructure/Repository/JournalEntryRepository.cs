@@ -41,7 +41,8 @@ namespace CVPZ.Infrastructure.Repository
 
         public JournalEntryRepository(CVPZContext context)
         {
-            this._context = context;
+            _context = context;
+            _context.Database.EnsureCreated();
         }
 
         public async Task<JournalEntry> AddAsync(JournalEntry entity)
@@ -65,8 +66,7 @@ namespace CVPZ.Infrastructure.Repository
             var taskResult = Task.Run(() => {
                 return new JournalEntry {
                     Id = id,
-                    Description = Descriptions[rng.Next(Descriptions.Length)],
-                    Technologies = new List<string> { Technologies[rng.Next(Technologies.Length)], Technologies[rng.Next(Technologies.Length)] }
+                    Description = Descriptions[rng.Next(Descriptions.Length)]
                 };
             });
             return await taskResult;
@@ -79,8 +79,7 @@ namespace CVPZ.Infrastructure.Repository
                 return Enumerable.Range(1, 5)
                     .Select(index => new JournalEntry
                     {
-                        Description = Descriptions[rng.Next(Descriptions.Length)],
-                        Technologies = new List<string> { Technologies[rng.Next(Technologies.Length)], Technologies[rng.Next(Technologies.Length)] }
+                        Description = Descriptions[rng.Next(Descriptions.Length)]
                     });
             });
             return await taskResult;

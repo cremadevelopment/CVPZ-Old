@@ -37,14 +37,17 @@ namespace CVPZ.Application.Service
         public async Task<JournalEntry> GetByIdAsync(int id)
         {
             _logger.LogInformation("Service request recieved to get journal entry by id.");
-            return await _journalEntryRepository.GetByIdAsync(id);
-
+            var journalEntry = await _journalEntryRepository.GetByIdAsync(id);
+            _logger.LogDebug("Retrieved journal entry {@journalEntry}", journalEntry);
+            return journalEntry;
         }
 
         public async Task<JournalEntry> AddAsync(JournalEntry entry)
         {
             _logger.LogInformation("Service request recieved to create journal entry.");
-            return await _journalEntryRepository.AddAsync(entry);
+            var journalEntry = await _journalEntryRepository.AddAsync(entry);
+            _logger.LogDebug("Added journal entry {@journalEntry}", journalEntry);
+            return journalEntry;
         }
     }
 }
