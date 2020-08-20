@@ -16,8 +16,7 @@ namespace CVPZ.Api.Model
             return new JournalEntry()
             {
                 Id = entity.Id,
-                Description = entity.Description,
-                Technologies = entity.Technologies
+                Description = entity.Description
             };
         }
     }

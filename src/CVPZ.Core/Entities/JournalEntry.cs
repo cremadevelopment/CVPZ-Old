@@ -5,6 +5,5 @@ namespace CVPZ.Core.Entities
     public class JournalEntry : BaseEntity
     {
         public string Description { get; set; }
-        public List<string> Technologies { get; set; }
     }
 }

@@ -47,8 +47,7 @@ namespace CVPZ.Api
             _logger.LogInformation("Recieved journal entry create request.");
             var entry = new JournalEntryEntity()
             {
-                Description = journalEntry.Description,
-                Technologies = journalEntry.Technologies
+                Description = journalEntry.Description
             };
             await _journalService.AddAsync(entry);
             return JournalEntry.FromEntity(entry);
