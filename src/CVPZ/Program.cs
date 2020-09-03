@@ -1,5 +1,6 @@
 using System;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Events;
@@ -36,6 +37,18 @@ namespace CVPZ
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration((ctx, builder) => {
+                    var env = ctx.HostingEnvironment;
+
+                    Log.Information("Loading configuration for {@env}", env);
+
+                    builder.AddJsonFile("appsettings.json", false, false);
+                    builder.AddJsonFile($"appsettings.{env.EnvironmentName}.json", false, false);
+                    if (env.IsDevelopment())
+                    {
+                        builder.AddUserSecrets<Program>();
+                    }
+                })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
