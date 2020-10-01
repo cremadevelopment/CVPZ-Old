@@ -1,3 +1,4 @@
+using IdentityServer4;
 using CVPZ.Application.Service;
 using CVPZ.Infrastructure.Data;
 using Microsoft.AspNetCore.Builder;
@@ -9,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Microsoft.IdentityModel.Tokens;
 
 namespace CVPZ
 {
@@ -30,6 +32,33 @@ namespace CVPZ
                     Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddControllersWithViews();
+
+            var idBuilder = services.AddIdentityServer()
+                .AddInMemoryIdentityResources(Config.IdentityResources)
+                .AddInMemoryApiScopes(Config.ApiScopes)
+                .AddInMemoryClients(Config.Clients)
+                .AddTestUsers(CVPZ.TestUsers.Users);
+
+            idBuilder.AddDeveloperSigningCredential();
+
+            services.AddAuthentication()
+                .AddOpenIdConnect("oidc", "Demo IdentityServer", options =>
+                {
+                    options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
+                    options.SignOutScheme = IdentityServerConstants.SignoutScheme;
+                    options.SaveTokens = true;
+
+                    options.Authority = "https://demo.identityserver.io/";
+                    options.ClientId = "interactive.confidential";
+                    options.ClientSecret = "secret";
+                    options.ResponseType = "code";
+
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        NameClaimType = "name",
+                        RoleClaimType = "role"
+                    };
+                });
 
             services.AddSwaggerGen(c =>
             {
@@ -74,6 +103,9 @@ namespace CVPZ
             }
 
             app.UseRouting();
+
+            app.UseIdentityServer();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
