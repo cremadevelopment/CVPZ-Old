@@ -42,8 +42,9 @@ namespace CVPZ
 
                     Log.Information("Loading configuration for {@env}", env);
 
-                    builder.AddJsonFile("appsettings.json", false, false);
-                    builder.AddJsonFile($"appsettings.{env.EnvironmentName}.json", false, false);
+                    builder
+                        .AddJsonFile("appsettings.json", false, false)
+                        .AddJsonFile($"appsettings.{env.EnvironmentName}.json", false, false);
                     if (env.IsDevelopment())
                     {
                         builder.AddUserSecrets<Program>();
