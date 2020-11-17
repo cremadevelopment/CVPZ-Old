@@ -125,5 +125,8 @@
       }
     }
   },
-  "defaultProject": "cvpz"
+  "defaultProject": "cvpz",
+  "cli": {
+    "analytics": false
+  }
 }

@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +20,25 @@ import { HomeComponent } from './home/home.component';
 import { JournalAddComponent } from './journal-add/journal-add.component';
 import { JournalListComponent } from './journal-list/journal-list.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
+import { AuthModule, LogLevel, OidcConfigService } from 'angular-auth-oidc-client';
+import { AutoLoginComponent } from './auto-login/auto-login.component';
+import { ForbiddenComponent } from './forbidden/forbidden.component';
+import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
+
+export function configureAuth(oidcConfigService: OidcConfigService) {
+  return () =>
+      oidcConfigService.withConfig({
+          stsServer: 'https://localhost:7001',
+          redirectUrl: window.location.origin,
+          postLogoutRedirectUri: window.location.origin,
+          clientId: 'angularClient',
+          scope: 'openid profile email',
+          responseType: 'code',
+          silentRenew: true,
+          silentRenewUrl: `${window.location.origin}/silent-renew.html`,
+          logLevel: LogLevel.Debug,
+      });
+}
 
 @NgModule({
   declarations: [
@@ -28,11 +47,15 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
     HomeComponent,
     JournalAddComponent,
     JournalListComponent,
-    NavMenuComponent
+    NavMenuComponent,
+    AutoLoginComponent,
+    ForbiddenComponent,
+    UnauthorizedComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    AuthModule.forRoot(),
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
@@ -42,9 +65,17 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
     MatInputModule,
     MatListModule,
     MatSliderModule,
-    MatToolbarModule
+    MatToolbarModule,
   ],
-  providers: [],
+  providers: [
+    OidcConfigService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: configureAuth,
+      deps: [OidcConfigService],
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
