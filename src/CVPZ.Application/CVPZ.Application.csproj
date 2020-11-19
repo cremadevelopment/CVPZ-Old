@@ -5,11 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="9.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.7" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\CVPZ.Core\CVPZ.Core.csproj" />
+    <ProjectReference Include="..\CVPZ.Domain\CVPZ.Domain.csproj" />
   </ItemGroup>
 
 </Project>

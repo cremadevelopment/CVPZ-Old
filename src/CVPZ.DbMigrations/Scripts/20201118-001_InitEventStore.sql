@@ -7,8 +7,7 @@ CREATE TABLE [dbo].[EventStore](
     [Version] [int] NOT NULL,
     [Name] [nvarchar](250) NOT NULL,
     [AggregateId] [nvarchar](250) NOT NULL,
-    [Data] [nvarchar](max) NOT NULL,
-    [Aggregate] [nvarchar](250) NOT NULL
+    [Data] [nvarchar](max) NOT NULL
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
 

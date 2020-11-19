@@ -22,3 +22,11 @@ dotnet ef migrations add InitialCreate --project .\src\CVPZ.Infrastructure\CVPZ.
 
 - Authorize maybe useing this -> <https://dev.to/_patrickgod/basic-authentication-with-a-net-core-web-api-2a59>
     - Helpful links <https://jasonwatmore.com/post/2019/10/14/aspnet-core-3-simple-api-for-authentication-registration-and-user-management>
+
+## Dependencies
+
+- [MediatR]("https://github.com/jbogard/MediatR")
+- [Scrutor]("https://github.com/khellang/Scrutor")
+- [Serilog]("https://serilog.net/")
+- [Swashbuckle]("https://github.com/domaindrivendev/Swashbuckle.AspNetCore")
+- [Tactical.DDD]("https://github.com/aneshas/tactical-ddd")

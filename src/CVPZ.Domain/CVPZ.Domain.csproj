@@ -1,11 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CVPZ.Domain\CVPZ.Domain.csproj" />
+    <PackageReference Include="TacticalDDD" Version="1.0.31" />
   </ItemGroup>
 
 </Project>
