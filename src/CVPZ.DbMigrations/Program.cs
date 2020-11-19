@@ -16,7 +16,7 @@ namespace CVPZ.DbMigrations
 
             var upgradeEngineBuilder = DeployChanges.To
                             .SqlDatabase(connectionString, null)
-                            .JournalToSqlTable("versions", "CVPZ_SchemaVersion")
+                            .JournalToSqlTable("dbo", "CVPZ_SchemaVersion")
                             .WithScriptsEmbeddedInAssembly(Assembly.GetExecutingAssembly())
                             .WithTransaction()
                             .LogToConsole();
