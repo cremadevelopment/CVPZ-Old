@@ -21,7 +21,7 @@ namespace CVPZ.Infrastructure.Repository
             // ToDo :: Is this the correct location to initialize the database and migrate if necessary.
             _context = context;
             _context.Database.Migrate();
-//            _context.Database.EnsureCreated();
+//          _context.Database.EnsureCreated();
         }
 
         public async Task<JournalEntry> AddAsync(JournalEntry entity)
