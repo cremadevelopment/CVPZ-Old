@@ -26,7 +26,7 @@ namespace CVPZ.Api
             return response;
         }
 
-        [HttpPost("Update/{resumeId}")]
+        [HttpPost("{resumeId}")]
         public async Task<UpdateResumeResponse> Update([FromQuery]string resumeId, UpdateResume resume)
         {
             _logger.LogInformation("Recieved create resume request.");
