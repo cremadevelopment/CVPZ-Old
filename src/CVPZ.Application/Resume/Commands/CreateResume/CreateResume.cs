@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CVPZ.Application.Resume
+namespace CVPZ.Application.Resume.Commands.CreateResume
 {
     public class CreateResume : IRequest<CreateResumeResponse>
     {

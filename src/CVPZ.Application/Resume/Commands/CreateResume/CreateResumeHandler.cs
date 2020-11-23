@@ -4,7 +4,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CVPZ.Application.Resume
+namespace CVPZ.Application.Resume.Commands.CreateResume
 {
     public class CreateResumeHandler : IRequestHandler<CreateResume, CreateResumeResponse>
     {

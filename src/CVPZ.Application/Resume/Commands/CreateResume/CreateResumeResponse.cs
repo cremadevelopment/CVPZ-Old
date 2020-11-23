@@ -1,7 +1,7 @@
 ﻿using CVPZ.Domain.Resume;
 using System;
 
-namespace CVPZ.Application.Resume
+namespace CVPZ.Application.Resume.Commands.CreateResume
 {
     public class CreateResumeResponse
     {
