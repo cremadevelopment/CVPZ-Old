@@ -1,7 +1,5 @@
 ﻿using CVPZ.Domain.Resume.Events;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using Tactical.DDD;
 
 namespace CVPZ.Domain.Resume
@@ -24,7 +22,8 @@ namespace CVPZ.Domain.Resume
         {
 
             var resume = new Resume();
-            resume.Apply(new ResumeCreated(new ResumeId().ToString(), firstName, lastName));
+            var @event = new ResumeCreated(new ResumeId().ToString(), firstName, lastName);
+            resume.Apply(@event);
 
             return resume;
         }
