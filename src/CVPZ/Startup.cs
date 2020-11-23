@@ -11,8 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using MediatR;
-using CVPZ.Infrastructure.Repository;
 using CVPZ.Infrastructure.Factories;
+using CVPZ.Application.Resume.Commands.CreateResume;
 
 namespace CVPZ
 {

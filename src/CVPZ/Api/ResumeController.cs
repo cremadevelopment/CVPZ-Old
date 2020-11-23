@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 using MediatR;
+using CVPZ.Application.Resume.Commands.CreateResume;
 
 namespace CVPZ.Api
 {
@@ -26,12 +27,12 @@ namespace CVPZ.Api
             return response;
         }
 
-        [HttpPost("{resumeId}")]
-        public async Task<UpdateResumeResponse> Update([FromQuery]string resumeId, UpdateResume resume)
-        {
-            _logger.LogInformation("Recieved create resume request.");
-            var response = await _mediator.Send(resume);
-            return response;
-        }
+        //[HttpPost("{resumeId}")]
+        //public async Task<UpdateResumeResponse> Update([FromQuery]string resumeId, UpdateResume resume)
+        //{
+        //    _logger.LogInformation("Recieved create resume request.");
+        //    var response = await _mediator.Send(resume);
+        //    return response;
+        //}
     }
 }
