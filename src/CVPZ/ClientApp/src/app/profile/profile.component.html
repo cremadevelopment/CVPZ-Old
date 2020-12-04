@@ -1,1 +1,9 @@
 <p>profile works!</p>
+
+<button mat-raised-button color="accent" (click)="refreshSession()">Refresh Session</button>
+
+<div *ngIf="userData">
+    userData:
+    <br>
+    {{userData | json}}
+</div>
