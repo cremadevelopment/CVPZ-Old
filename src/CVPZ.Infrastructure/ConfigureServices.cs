@@ -16,7 +16,7 @@ namespace CVPZ.Infrastructure
         {
             services.AddDbContext<CVPZContext>(options =>
                 options.UseSqlite(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                    Configuration.GetConnectionString("CVPZConnection")));
 
             services.AddSingleton<ISqlConnectionFactory>(new SqlConnectionFactory(Configuration.GetConnectionString("EventStoreDatabase")));
 

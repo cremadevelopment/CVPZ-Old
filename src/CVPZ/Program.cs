@@ -44,7 +44,7 @@ namespace CVPZ
 
                     builder
                         .AddJsonFile("appsettings.json", false, false)
-                        .AddJsonFile($"appsettings.{env.EnvironmentName}.json", false, false);
+                        .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true, false);
                     if (env.IsDevelopment())
                     {
                         builder.AddUserSecrets<Program>();

@@ -3,6 +3,7 @@
 
 
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Events;
@@ -51,6 +52,19 @@ namespace CVPZ.IdentityServer
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration((ctx, builder) => {
+                    var env = ctx.HostingEnvironment;
+
+                    Log.Information("Loading configuration for {@env}", env);
+
+                    builder
+                        .AddJsonFile("appsettings.json", false, false)
+                        .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true, false);
+                    if (env.IsDevelopment())
+                    {
+                        builder.AddUserSecrets<Program>();
+                    }
+                })
                 .UseSerilog()
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
