@@ -25,6 +25,8 @@ import { JournalListComponent } from './journal-list/journal-list.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { AuthenticationComponent } from './authentication/authentication.component';
 import { AuthInterceptor } from './auth.interceptor';
+import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
+import { ProfileComponent } from './profile/profile.component';
 
 export function configureAuth(oidcConfigService: OidcConfigService) {
   return () =>
@@ -49,7 +51,9 @@ export function configureAuth(oidcConfigService: OidcConfigService) {
     JournalAddComponent,
     JournalListComponent,
     NavMenuComponent,
-    AuthenticationComponent
+    AuthenticationComponent,
+    UnauthorizedComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
