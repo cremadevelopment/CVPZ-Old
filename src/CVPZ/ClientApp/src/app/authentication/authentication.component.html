@@ -1,0 +1,6 @@
+<div *ngIf="!isAuthenticated">
+  <button mat-raised-button color="primary" (click)="login()">Login</button>
+</div>
+<div *ngIf="isAuthenticated">
+  <button mat-raised-button color="warn" (click)="logout()">Logout</button>
+</div>

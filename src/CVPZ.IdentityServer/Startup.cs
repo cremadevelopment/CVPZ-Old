@@ -35,6 +35,18 @@ namespace CVPZ.IdentityServer
 
             // not recommended for production - you need to store your key material somewhere secure
             builder.AddDeveloperSigningCredential();
+
+            services.AddCors(policy =>
+            {
+                // this defines a CORS policy called "default"
+                policy.AddPolicy("default", policy =>
+                {
+                    policy.WithOrigins(
+                        "https://localhost:5001") // ToDo :: CarBar :: This is a param array add other urls for cors here.
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+            });
         }
 
         public void Configure(IApplicationBuilder app)
@@ -47,6 +59,8 @@ namespace CVPZ.IdentityServer
             // uncomment if you want to add MVC
             app.UseStaticFiles();
             app.UseRouting();
+
+            app.UseCors("default");
 
             app.UseIdentityServer();
 

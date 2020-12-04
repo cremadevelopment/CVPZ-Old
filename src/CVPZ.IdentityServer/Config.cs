@@ -2,6 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
+using IdentityServer4;
 using IdentityServer4.Models;
 using System.Collections.Generic;
 
@@ -39,6 +40,25 @@ namespace CVPZ.IdentityServer
 
                     // scopes that client has access to
                     AllowedScopes = { "api1" }
+                },
+                // Net Angular Client
+                new Client
+                {
+                    ClientId = "netAngularClient",
+                    ClientName = "Net Angular Client",
+                    AllowedGrantTypes = GrantTypes.Code,
+                    RequireClientSecret = false,
+
+                    RedirectUris =           { "https://localhost:5001" },
+                    PostLogoutRedirectUris = { "https://localhost:5001" },
+                    AllowedCorsOrigins =     { "https://localhost:5001" },
+
+                    AllowedScopes =
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "api1"
+                    }
                 }
             };
     }
