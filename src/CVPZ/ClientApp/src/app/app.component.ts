@@ -7,7 +7,8 @@ import { OidcSecurityService } from 'angular-auth-oidc-client';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  
+  title = 'CVPZ';
+
   constructor(public oidcSecurityService: OidcSecurityService) {}
  
   ngOnInit() {
