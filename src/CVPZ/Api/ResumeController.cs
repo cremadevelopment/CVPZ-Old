@@ -5,6 +5,8 @@ using System;
 using System.Threading.Tasks;
 using MediatR;
 using CVPZ.Application.Resume.Commands.CreateResume;
+using CVPZ.Application.Resume.DataTransferObjects;
+using CVPZ.Application.Resume.Queries.GetResume;
 
 namespace CVPZ.Api
 {
@@ -17,6 +19,13 @@ namespace CVPZ.Api
         {
             _logger = logger;
             _mediator = mediator;
+        }
+
+        [HttpGet]
+        public async Task<ResumeDTO> Get([FromQuery] string resumeId)
+        {
+            var query = new GetResumeQuery { ResumeId = resumeId };
+            return await _mediator.Send(query);
         }
 
         [HttpPost("Create")]
