@@ -1,7 +1,5 @@
-﻿using CVPZ.Application.Resume;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Threading.Tasks;
 using MediatR;
 using CVPZ.Application.Resume.Commands.CreateResume;
@@ -30,7 +28,7 @@ namespace CVPZ.Api
         }
 
         [HttpPost("Create")]
-        public async Task<CreateResumeResponse> Create(CreateResume createResume)
+        public async Task<ResumeDTO> Create(CreateResume createResume)
         {
             _logger.LogInformation("Recieved create resume request.");
             var response = await _mediator.Send(createResume);
