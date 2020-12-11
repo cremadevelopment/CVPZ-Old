@@ -28,6 +28,11 @@ namespace CVPZ.Domain.Resume
             return resume;
         }
 
+        public void ModifyResume(string firstName, string lastName)
+        {
+            Apply(new ResumeModified(firstName, lastName));
+        }
+
         public void On(ResumeCreated @event)
         {
             Id = new ResumeId(@event.Id);
@@ -35,5 +40,10 @@ namespace CVPZ.Domain.Resume
             LastName = @event.LastName;
         }
 
+        public void On(ResumeModified @event)
+        {
+            FirstName = @event.FirstName;
+            LastName = @event.LastName;
+        }
     }
 }
