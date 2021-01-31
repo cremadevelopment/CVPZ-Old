@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 using JournalEntryEntity = CVPZ.Core.Entities.JournalEntry;
+using MediatR;
+using CVPZ.Application.Journal.Commands.CreateJournalEntry;
 
 namespace CVPZ.Api
 {
@@ -14,13 +16,16 @@ namespace CVPZ.Api
     {
         private readonly ILogger<JournalEntryController> _logger;
         private readonly IJournalService _journalService;
+        private readonly IMediator _mediator;
 
         public JournalEntryController(
             ILogger<JournalEntryController> logger,
-            IJournalService journalService)
+            IJournalService journalService,
+            IMediator mediator)
         {
             _logger = logger;
             _journalService = journalService;
+            _mediator = mediator;
         }
 
         [HttpGet]
@@ -42,15 +47,11 @@ namespace CVPZ.Api
         }
 
         [HttpPost]
-        public async Task<JournalEntry> Post(JournalEntry journalEntry)
+        public async Task<CreateJournalEntryResponse> Post(CreateJournalEntry createJournal)
         {
             _logger.LogInformation("Recieved journal entry create request.");
-            var entry = new JournalEntryEntity()
-            {
-                Description = journalEntry.Description
-            };
-            await _journalService.AddAsync(entry);
-            return JournalEntry.FromEntity(entry);
+
+            return await _mediator.Send(createJournal);
         }
     }
 }
