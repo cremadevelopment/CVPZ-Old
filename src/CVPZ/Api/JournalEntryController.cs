@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using JournalEntryEntity = CVPZ.Core.Entities.JournalEntry;
 using MediatR;
 using CVPZ.Application.Journal.Commands.CreateJournalEntry;
+using CVPZ.Application.Journal.Queries.GetJournalEntry;
 
 namespace CVPZ.Api
 {
@@ -39,11 +40,10 @@ namespace CVPZ.Api
         }
 
         [HttpGet("{id:int}")]
-        public async Task<JournalEntry> GetById(int id)
+        public async Task<GetJournalEntryResponse> GetById(int id)
         {
             _logger.LogInformation("Recieved journal entry get request.");
-            var entry = await _journalService.GetByIdAsync(id);
-            return JournalEntry.FromEntity(entry);
+            return await _mediator.Send(new GetJournalEntry { JournalEntryId = id });
         }
 
         [HttpPost]
