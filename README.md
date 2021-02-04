@@ -21,7 +21,7 @@ dotnet ef migrations add InitialCreate --project .\src\CVPZ.Infrastructure\CVPZ.
 - Do we have to identify if it's sql lite or sql server before to not migrate if it's sql lite?
 
 - Authorize maybe useing this -> <https://dev.to/_patrickgod/basic-authentication-with-a-net-core-web-api-2a59>
-    - Helpful links <https://jasonwatmore.com/post/2019/10/14/aspnet-core-3-simple-api-for-authentication-registration-and-user-management>
+  - Helpful links <https://jasonwatmore.com/post/2019/10/14/aspnet-core-3-simple-api-for-authentication-registration-and-user-management>
 
 ## Dependencies
 
