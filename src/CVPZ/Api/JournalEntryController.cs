@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using MediatR;
 using CVPZ.Application.Journal.Commands.CreateJournalEntry;
 using CVPZ.Application.Journal.Queries.GetJournalEntry;
+using CVPZ.Application.Resume.DataTransferObjects;
 
 namespace CVPZ.Api
 {

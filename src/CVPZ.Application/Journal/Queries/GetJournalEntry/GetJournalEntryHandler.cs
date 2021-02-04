@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CVPZ.Application.Journal.Commands.CreateJournalEntry;
+using CVPZ.Application.Resume.DataTransferObjects;
 using CVPZ.Core.Entities;
 using CVPZ.Core.Repository;
 using MediatR;

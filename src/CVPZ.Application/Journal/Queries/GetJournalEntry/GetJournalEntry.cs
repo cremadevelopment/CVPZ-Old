@@ -1,4 +1,4 @@
-﻿using CVPZ.Application.Journal.Commands.CreateJournalEntry;
+﻿using CVPZ.Application.Resume.DataTransferObjects;
 using MediatR;
 
 namespace CVPZ.Application.Journal.Queries.GetJournalEntry
