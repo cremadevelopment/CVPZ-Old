@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace CVPZ.Application.Journal.Commands.CreateJournalEntry
 {
-    public class CreateJournalEntryResponse
+    public class JournalDTO
     {
         public int JournalEntryId { get; set; }
 
-        public CreateJournalEntryResponse(int id)
+        public JournalDTO(int id)
         {
             JournalEntryId = id;
         }

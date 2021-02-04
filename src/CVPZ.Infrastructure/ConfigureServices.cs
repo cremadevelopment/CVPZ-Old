@@ -21,7 +21,7 @@ namespace CVPZ.Infrastructure
             services.AddSingleton<ISqlConnectionFactory>(new SqlConnectionFactory(Configuration.GetConnectionString("EventStoreDatabase")));
 
             services.AddTransient<IEventStore, EventStoreRepository>();
-            services.AddTransient<IRepository<JournalEntry>, JournalEntryRepository>();
+            services.AddTransient<IJournalRepository, JournalRepository>();
             services.AddTransient<IResumeRepository, ResumeRepository>();
         }
     }

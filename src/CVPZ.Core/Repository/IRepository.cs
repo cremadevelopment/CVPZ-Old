@@ -1,4 +1,5 @@
 ﻿using CVPZ.Core.Entities;
+using CVPZ.Domain.Journal;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,5 +14,6 @@ namespace CVPZ.Core.Repository
         Task<T> AddAsync(T entity);
         Task UpdateAsync(T entity);
         Task DeleteAsync(T entity);
+        Task SaveAsync(Journal journal);
     }
 }

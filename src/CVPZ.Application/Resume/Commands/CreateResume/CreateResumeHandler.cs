@@ -2,7 +2,6 @@
 using CVPZ.Application.Resume.DataTransferObjects;
 using CVPZ.Core.Repository;
 using MediatR;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 

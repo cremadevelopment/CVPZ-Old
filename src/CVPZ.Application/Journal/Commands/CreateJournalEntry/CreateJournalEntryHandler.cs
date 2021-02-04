@@ -1,30 +1,29 @@
-﻿using CVPZ.Core.Entities;
+﻿using AutoMapper;
+using CVPZ.Application.Resume.DataTransferObjects;
 using CVPZ.Core.Repository;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace CVPZ.Application.Journal.Commands.CreateJournalEntry
 {
-    public class CreateJournalEntryHandler : IRequestHandler<CreateJournalEntry, CreateJournalEntryResponse>
+    public class CreateJournalEntryHandler : IRequestHandler<CreateJournalEntry, JournalDTO>
     {
-        private readonly IRepository<JournalEntry> _journalEntryRepository;
+        private readonly IJournalRepository _journalRepository;
+        private readonly IMapper _mapper;
 
-        public CreateJournalEntryHandler(IRepository<JournalEntry> journalEntryRepository)
+        public CreateJournalEntryHandler(IJournalRepository journalRepository, IMapper mapper)
         {
-            _journalEntryRepository = journalEntryRepository;
+            _journalRepository = journalRepository;
+            _mapper = mapper;
         }
 
-        public async Task<CreateJournalEntryResponse> Handle(CreateJournalEntry request, CancellationToken cancellationToken)
+        public async Task<JournalDTO> Handle(CreateJournalEntry request, CancellationToken cancellationToken)
         {
             Thread.Sleep(500);
-
-            var journalEntry = await _journalEntryRepository.AddAsync(request.ToEntity());
-            return new CreateJournalEntryResponse(journalEntry.Id);
+            var journal = CVPZ.Domain.Journal.Journal.CreateNewJournalEntry(request.Description);
+            var journalId = await _journalRepository.SaveAsync(journal);
+            return _mapper.Map<JournalDTO>(journal);
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using CVPZ.Core.Entities;
+﻿using AutoMapper;
+using CVPZ.Application.Journal.Commands.CreateJournalEntry;
+using CVPZ.Core.Entities;
 using CVPZ.Core.Repository;
 using MediatR;
 using System;
@@ -10,19 +12,21 @@ using System.Threading.Tasks;
 
 namespace CVPZ.Application.Journal.Queries.GetJournalEntry
 {
-    public class GetJournalEntryHandler : IRequestHandler<GetJournalEntry, GetJournalEntryResponse>
+    public class GetJournalEntryHandler : IRequestHandler<GetJournalEntry, JournalDTO>
     {
-        private readonly IRepository<JournalEntry> _journalEntryRepository;
+        private readonly IJournalRepository _journalRepository;
+        private readonly IMapper _mapper;
 
-        public GetJournalEntryHandler(IRepository<JournalEntry> journalEntryRepository)
+        public GetJournalEntryHandler(IJournalRepository journalRepository, IMapper mapper)
         {
-            _journalEntryRepository = journalEntryRepository;
+            _journalRepository = journalRepository;
+            _mapper = mapper;
         }
 
-        public async Task<GetJournalEntryResponse> Handle(GetJournalEntry request, CancellationToken cancellationToken)
+        public async Task<JournalDTO> Handle(GetJournalEntry request, CancellationToken cancellationToken)
         {
-            var journalEntry = await _journalEntryRepository.GetByIdAsync(request.JournalEntryId);
-            return new GetJournalEntryResponse(journalEntry);
+            var journal = await _journalRepository.GetByIdAsync(request.JournalEntryId);
+            return _mapper.Map<JournalDTO>(journal);
         }
     }
 }

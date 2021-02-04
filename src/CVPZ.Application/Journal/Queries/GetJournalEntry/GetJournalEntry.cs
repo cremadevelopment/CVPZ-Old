@@ -1,14 +1,10 @@
-﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CVPZ.Application.Journal.Commands.CreateJournalEntry;
+using MediatR;
 
 namespace CVPZ.Application.Journal.Queries.GetJournalEntry
 {
-    public class GetJournalEntry : IRequest<GetJournalEntryResponse>
+    public class GetJournalEntry : IRequest<JournalDTO>
     {
-        public int JournalEntryId { get; set; }
+        public string JournalEntryId { get; set; }
     }
 }

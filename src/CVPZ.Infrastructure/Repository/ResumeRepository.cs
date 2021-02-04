@@ -1,8 +1,5 @@
 ﻿using CVPZ.Core.Repository;
 using CVPZ.Domain.Resume;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Tactical.DDD.EventSourcing;
 
