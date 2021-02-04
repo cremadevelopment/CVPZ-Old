@@ -11,6 +11,7 @@ namespace CVPZ.Domain.Journal.Events
         {
             Id = id;
             Description = description;
+            CreatedAt = DateTime.Now;
         }
 
         public string Id { get; private set; }
