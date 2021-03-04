@@ -1,4 +1,5 @@
 ﻿using CVPZ.Core.Entities;
+using CVPZ.Infrastructure.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
